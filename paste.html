@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>复制粘贴</title>
+</head>
+<body>
+    <div>
+        <input type="text" id="int" value="">
+        <button onclick="copy()">复制</button>
+        <button onclick="paste()">粘贴</button>
+        <div style="margin-top: 10px">
+            <textarea name="textarea" id="textarea" cols="30" rows="10"></textarea>
+        </div>
+    </div>
+
+    <div style="margin-top: 20px">
+        <input type="text" id='text' value="">
+        <button onclick="copy2()">浏览器自带复制粘贴</button>
+        <button onclick="cut()">浏览器自带剪切复制</button>
+        <div style="margin-top: 10px">
+            <textarea name="textarea" id="info2" cols="30" rows="10"></textarea>
+        </div>
+    </div>
+    <div style="margin-top: 20px">
+        <p id="p1">春天在哪里，春天在哪里，春天在这里</p>
+        <button onclick="createUrl()">url</button>
+    </div>
+</body>
+<script>
+    var copyInfo = '';
+    var info;
+
+    // 原生js复制
+    function copy() {
+        info = document.getElementById('int').value;
+
+        copyInfo= info;
+    }
+
+    // 原生js粘贴
+    function paste() {
+        document.getElementById('textarea').value = copyInfo;
+    }
+
+    // 浏览器自带复制粘贴功能
+    function copy2() {
+        info = document.getElementById('text');
+        info.select(); // 选择对象
+        document.execCommand('copy');
+    }
+
+    //浏览器自带剪切复制
+    function cut() {
+        info = document.getElementById('text');
+        info.select(); // 选择对象
+        document.execCommand('cut');
+    }
+
+    function createUrl() {
+       var txt =  document.getElementById('p1');
+       txt.select();
+       document.execCommand('createLink');
+    }
+
+</script>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loash</title>
+</head>
+<body>
+
+</body>
+<script type="text/javaScript">
+    var arr = ['a','b','c','d']; 
+    // 分割数组，组成一个新的数组
+    function chunk(arr,len) {
+        let _arr = [];
+        for (let i = 0; i < arr.length; i+=len) {
+            _arr.push(arr.slice(i,i+len))
+        }
+        console.log(_arr,'arr')
+        return _arr;
+    }
+
+    // chunk(arr,2); // [['a','b'],['c','d']]
+
+
+    var a1 = [0, 1, false, 2, '', 3,'123'];
+    // 去除假数组
+    function compact(params) {
+        let res = [];
+        for(let i = 0; i< params.length; i++){
+            if(params[i]){
+                res.push(params[i]);
+            }
+        }
+    }
+
+    compact(a1);
+
+    var a2 = [1];
+
+    var _a2 = a2.concat(2,[3],[[4]]);
+    // console.log(_a2,'_a2');
+
+    /*
+    检查数组是否与另外的数组有相同值
+    checkArr：
+    */
+    function _difference(checkArr,arr2) {
+        return checkArr.filter(item => arr2.indexOf(item) == -1);
+    }
+
+    var _a3 = _difference([1,2,3,5],[3,4]);
+
+//切除index之前的值
+    function _drop(arr,index = 1) {
+        var len = arr == null ? 0 : arr.length;
+        return len ?  arr.slice(index) : [];
+    }
+
+   var a4 = _drop([1,2,3,4,5],3);
+
+   // 从右侧去除数组元素
+    function _dropRight(arr,index = 1) {
+        var len = arr == null ? 0 : arr.length;
+        return len ? arr.slice(0, -index) : [];
+    }
+
+   var a5 = _dropRight([1,2,3,4,5],2);
+
+// 根据下标值填充
+   function _fill(arr,val,start,end) {
+       let len = arr ? arr.length : 0;
+       let _start = start ? start : 0;
+       let _end = end ? end : len;
+
+       while (_start < _end) {
+           arr[_start++] = val;
+       }
+
+       return arr;
+   }
+
+   var a6 = _fill([1,2,3,4],'*',0,2); //  ["*", "*", 3, 4] 
+
+
+   const firstPromise = new Promise((res, rej) => {
+        // setTimeout(()=>{
+        //     res('one')
+        // },1000);
+        setTimeout(res,1000,'one')
+    });
+
+    const secondPromise = new Promise((res, rej) => {
+        // setTimeout(()=>{
+        //     res('two')
+        // },500);
+        setTimeout(res,500,'two')
+    });
+
+    // Promise.race([firstPromise, secondPromise]).then(res => console.log(res,'res')); // 'two'
+    /*promise.race赛跑的意思，哪个跑的快，哪个就返回哪个结果，不管本身是成功还是失败*/
+    /*promise.all, 最先返回的是失败的结果，成功按照顺序返回*/
+
+
+    function* generator(i) {
+        yield i;
+        yield i * 2;
+        yield i * 2 +1;
+    }
+
+    const gen = generator(10);
+
+    // console.log(gen.next().value); // 10
+    // console.log(gen.next().value); // 20
+    // console.log(gen.next().value); // 21
+
+    // console.log([...'Lydia']);
+
+    // console.log(!!null,!!'',!!1,'!!null'); // false,false,true
+
+//    let a7 =  [[0, 1], [2, 3]].reduce(
+//   (acc, cur) => {
+//     return acc.concat(cur)
+//   },
+//   [1, 2]
+// )
+// console.log(a7,'a7');
+
+// (() => {
+//   let x, y
+//   try {
+//     throw new Error()
+//   } catch (x) {
+//     (x = 1), (y = 2)
+//     console.log(x,'xxx')
+//   }
+//   console.log(x,'xee')
+//   console.log(y,'yee')
+// })()
+
+
+// const numbers = [1, 2, 3]
+// numbers[10] = 11
+// console.log(numbers) // [1,2,3, 7*empty,11]
+
+// console.log(typeof typeof 1); // string
+
+function sayHi() {
+  return (() => 0)()
+}
+
+typeof sayHi() // number
+
+const person = { name: 'Lydia' }
+
+function sayHi(age) {
+  console.log(`${this.name} is ${age}`)
+}
+
+sayHi.call(person, 21) // lydia is 21  call 绑定并调用
+sayHi.bind(person, 21) // function bind:只绑定，不调用
+
+const a = {}
+const b = { key: 'b' }
+const c = { key: 'c' }
+
+a[b] = 123
+a[c] = 456
+
+// console.log(a[b])
+
+let number = 0
+// console.log(number++)
+// console.log(++number)
+// console.log(number)
+
+function Person(firstName, lastName) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+}
+
+const member = new Person("Lydia", "Hallie");
+Person.getFullName = function () {
+  return `${this.firstName} ${this.lastName}`;
+}
+
+// console.log(member.getFullName()); // typeError
+
+// let greeting
+// greetign = {} // Typo!
+// console.log(greetign)
+
+const shape = {
+  radius: 10,
+  diameter() {
+    return this.radius * 2
+  },
+  perimeter: () => 2 * Math.PI * this.radius
+}
+
+shape.diameter()
+shape.perimeter()
+
+
+// for (var i = 0; i < 3; i++) {
+//   setTimeout(() => console.log(i), 1) // 3，3，3
+// }
+
+// for (let i = 0; i < 3; i++) {
+//   setTimeout(() => console.log(i), 1) // 1，2，3
+// }
+
+// function indexOf(arr=[1,2,3,4,5],item=2) {
+//     if(arr.indexOf(item) > -1){
+//         console.log(arr.indexOf(item));
+//     } else {
+//         return -1;
+//     }
+// } 
+
+// indexOf();
+</script>
+</html>
